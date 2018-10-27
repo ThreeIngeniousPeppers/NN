@@ -3,7 +3,13 @@ $(document).ready(function() {
         type: "GET",
         url: "out.csv",
         dataType: "text",
-        success: function(data) {processData(data);}
+        success: function(data) {
+
+            var parsedData = processData(data);
+
+            console.log(parsedData);
+
+        }
      });
 });
 
@@ -21,5 +27,5 @@ function processData(allText) {
        };
        resultArray.push(rowObject);
     }
-    console.log(resultArray);
+    return resultArray;
 }
