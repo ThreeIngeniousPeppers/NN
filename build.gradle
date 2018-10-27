@@ -4,19 +4,30 @@ apply plugin: 'application'
 targetCompatibility = 1.8
 sourceCompatibility = 1.8
 
-compileJava.options.fork = true
-compileJava.options.forkOptions.executable = "C:\\Program Files\\Java\\jdk1.8.0_181\\bin\\javac.exe"
-
 repositories {
     mavenCentral()
 }
 
 dependencies {
     compile 'org.encog:encog-core:3.3.0'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.9.7'
+    compile 'com.fasterxml.jackson.core:jackson-annotations:2.9.7'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.9.7'
+    compile 'commons-io:commons-io:+'
 }
 
-task runExample(group: 'examples', description: 'Run the sample stand-alone project.',
+task runMarketPredict(group: 'main', description: 'Bitcoin market prevision using Encog prediction module',
+		dependsOn: 'classes', type: JavaExec) {
+	main = 'org.NN.MarketPredict'
+	classpath = sourceSets.main.runtimeClasspath
+	
+	if (project.hasProperty('argv')) {
+		args(argv.split(','))
+	}
+}
+
+task runTest(group: 'test', description: 'Bitcoin market prevision using Encog prediction module',
         dependsOn: 'classes', type: JavaExec) {
-    main = 'HelloWorld'
+    main = 'org.NN.Test'
     classpath = sourceSets.main.runtimeClasspath
 }
