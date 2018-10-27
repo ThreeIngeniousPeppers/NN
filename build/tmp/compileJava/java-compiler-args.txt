@@ -1,0 +1,14 @@
+-source
+1.8
+-target
+1.8
+-d
+"C:\\Влад\\Programming\\Java\\Neural Networks\\encog-sample-java-master\\build\\classes\\java\\main"
+-g
+-sourcepath
+""
+-proc:none
+-XDuseUnsharedTable=true
+-classpath
+"C:\\Users\\vlad2\\.gradle\\caches\\modules-2\\files-2.1\\org.encog\\encog-core\\3.3.0\\180762c3c63129a63514a641d05c4243128a0f9b\\encog-core-3.3.0.jar;C:\\Users\\vlad2\\.gradle\\caches\\modules-2\\files-2.1\\org.apache.commons\\commons-math3\\3.0\\5f8d1d720333aa9a7dee1c949ea70d9ed7da6106\\commons-math3-3.0.jar;C:\\Влад\\Programming\\Java\\Neural Networks\\encog-sample-java-master\\build\\classes\\java\\main"
+"C:\\Влад\\Programming\\Java\\Neural Networks\\encog-sample-java-master\\src\\main\\java\\HelloWorld.java"
