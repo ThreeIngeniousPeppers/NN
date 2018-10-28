@@ -31,7 +31,7 @@ public class MarketBuildTraining {
 		// The 60 days will be used to evaluate prediction.
 		begin.add(Calendar.HOUR, -1);
 		end.add(Calendar.HOUR, -1);
-		begin.add(Calendar.HOUR, -24);
+		begin.add(Calendar.YEAR, -1);
 		
 		market.load(begin.getTime(), end.getTime());
 		market.generate();

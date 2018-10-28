@@ -23,8 +23,6 @@ public class MarketEvaluate {
 		up, down
 	};
 
-	private static double refVal;
-
 	public static Direction determineDirection(double d) {
 		if (d < 0)
 			return Direction.down;
