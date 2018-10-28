@@ -9,21 +9,41 @@ repositories {
 }
 
 dependencies {
-    compile 'org.encog:encog-core:3.3.0'
-    compile 'com.fasterxml.jackson.core:jackson-core:2.9.7'
-    compile 'com.fasterxml.jackson.core:jackson-annotations:2.9.7'
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.9.7'
+    compile 'org.encog:encog-core:+'
+    compile 'com.fasterxml.jackson.core:jackson-core:+'
+    compile 'com.fasterxml.jackson.core:jackson-annotations:+'
+    compile 'com.fasterxml.jackson.core:jackson-databind:+'
     compile 'commons-io:commons-io:+'
 }
 
-task runMarketPredict(group: 'main', description: 'Bitcoin market prevision using Encog prediction module',
+task runMarketPredict(group: 'days', description: 'Bitcoin market prevision using Encog prediction module',
 		dependsOn: 'classes', type: JavaExec) {
 	main = 'org.NN.MarketPredict'
 	classpath = sourceSets.main.runtimeClasspath
 	
-	if (project.hasProperty('argv')) {
+	if (project.hasProperty('argv')) { // gradle runMarketPredict -Pargv=.,action
 		args(argv.split(','))
 	}
+}
+
+task runMarketPredictMinutes(group: 'minutes', description: 'Bitcoin market prevision using Encog prediction module',
+        dependsOn: 'classes', type: JavaExec) {
+    main = 'org.NN10min.MarketPredict'
+    classpath = sourceSets.main.runtimeClasspath
+
+    if (project.hasProperty('argv')) { // gradle runMarketPredict -Pargv=.,action
+        args(argv.split(','))
+    }
+}
+
+task runMarketPredictHours(group: 'hours', description: 'Bitcoin market prevision using Encog prediction module',
+        dependsOn: 'classes', type: JavaExec) {
+    main = 'org.NNhour.MarketPredict'
+    classpath = sourceSets.main.runtimeClasspath
+
+    if (project.hasProperty('argv')) { // gradle runMarketPredict -Pargv=.,action
+        args(argv.split(','))
+    }
 }
 
 task runTest(group: 'test', description: 'Bitcoin market prevision using Encog prediction module',

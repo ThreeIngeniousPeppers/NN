@@ -1,24 +1,21 @@
-package org.NN;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.DecimalFormat;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.GregorianCalendar;
+package org.NN10min;
 
 import org.encog.ml.data.MLData;
 import org.encog.ml.data.MLDataPair;
 import org.encog.ml.data.market.MarketDataDescription;
 import org.encog.ml.data.market.MarketDataType;
 import org.encog.ml.data.market.MarketMLDataSet;
-import org.encog.ml.data.market.loader.LoadedMarketData;
 import org.encog.ml.data.market.loader.MarketLoader;
-import org.encog.ml.data.market.loader.YahooFinanceLoader;
-import org.encog.neural.data.NeuralData;
 import org.encog.neural.networks.BasicNetwork;
 import org.encog.persist.EncogDirectoryPersistence;
+import org.encog.util.time.TimeUnit;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.DecimalFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class MarketEvaluate {
 
@@ -26,6 +23,7 @@ public class MarketEvaluate {
 		up, down
 	};
 
+	private static double refVal;
 
 	public static Direction determineDirection(double d) {
 		if (d < 0)
@@ -38,13 +36,14 @@ public class MarketEvaluate {
 		MarketLoader loader = new CryptoCompareLoader();
 		MarketMLDataSet result = new MarketMLDataSet(loader,
 				Config.INPUT_WINDOW, Config.PREDICT_WINDOW);
+		result.setSequenceGrandularity(TimeUnit.MINUTES);
 		MarketDataDescription desc = new MarketDataDescription(Config.TICKER,
 				MarketDataType.CLOSE, true, true);
 		result.addDescription(desc);
 
 		Calendar end = new GregorianCalendar();// end today
 		Calendar begin = (Calendar) end.clone();// begin 30 days ago
-		begin.add(Calendar.DATE, -60);
+		begin.add(Calendar.HOUR, -1);
 
 		result.load(begin.getTime(), end.getTime());
 		result.generate();
@@ -55,7 +54,7 @@ public class MarketEvaluate {
 
 	public static void evaluate(File dataDir) {
 
-		File file = new File(dataDir,Config.NETWORK_FILE);
+		File file = new File(dataDir, Config.NETWORK_FILE);
 
 		if (!file.exists()) {
 			System.out.println("Can't read file: " + file.getAbsolutePath());
@@ -70,7 +69,7 @@ public class MarketEvaluate {
 		DecimalFormat format = new DecimalFormat("#0.0000");
 
 		try {
-            PrintWriter outcsv = new PrintWriter("plots/out.csv");
+            PrintWriter outcsv = new PrintWriter("plots/outmin.csv");
             outcsv.println("time,actual,predicted");
 
 

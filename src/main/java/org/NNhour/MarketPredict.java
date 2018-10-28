@@ -1,9 +1,8 @@
-package org.NN;
-
-import java.io.File;
+package org.NNhour;
 
 import org.encog.Encog;
 
+import java.io.File;
 
 
 /**

@@ -1,9 +1,8 @@
-package org.NN;
-
-import java.io.File;
+package org.NN10min;
 
 import org.encog.Encog;
 
+import java.io.File;
 
 
 /**
@@ -28,6 +27,8 @@ public class MarketPredict {
 			} 
 			else if( args[1].equalsIgnoreCase("evaluate") ) {
 				MarketEvaluate.evaluate(dataDir);
+			} else if( args[1].equalsIgnoreCase("prune") ) {
+				MarketPrune.incremental(dataDir);
 			}
 			Encog.getInstance().shutdown();
 		}
